@@ -18,24 +18,24 @@ class AtmosphereModeling():
     def atmo_kurucz(self, starname, teff, logg, feh, vtur, erteff, erlogg,erfeh,ervtur):
         """Creating models of atmospheres """
 
-        os.system('echo %s %s %s | /home/vadibekyan/Programs/kurucz_intermod/intermod' % (teff, logg, feh))
-        os.system('echo %s | /home/vadibekyan/Programs/kurucz_intermod/transform.e' % vtur)
+        os.system('echo %s %s %s | intermod_kurucz' % (teff, logg, feh))
+        os.system('echo %s | transform_kurucz' % vtur)
         os.system('mv out.atm %s_orig.atm' %starname)
 
-        os.system('echo %s %s %s | /home/vadibekyan/Programs/kurucz_intermod/intermod' % (teff, logg, feh + erfeh))
-        os.system('echo %s | /home/vadibekyan/Programs/kurucz_intermod/transform.e' % vtur)
+        os.system('echo %s %s %s | intermod_kurucz' % (teff, logg, feh + erfeh))
+        os.system('echo %s | transform_kurucz' % vtur)
         os.system('mv out.atm %s_erfeh.atm' %starname)
 
-        os.system('echo %s %s %s | /home/vadibekyan/Programs/kurucz_intermod/intermod' % (teff+erteff, logg, feh))
-        os.system('echo %s | /home/vadibekyan/Programs/kurucz_intermod/transform.e' % vtur)
+        os.system('echo %s %s %s | intermod_kurucz' % (teff+erteff, logg, feh))
+        os.system('echo %s | transform_kurucz' % vtur)
         os.system('mv out.atm %s_erteff.atm' %starname)
 
-        os.system('echo %s %s %s | /home/vadibekyan/Programs/kurucz_intermod/intermod' % (teff, logg+erlogg, feh))
-        os.system('echo %s | /home/vadibekyan/Programs/kurucz_intermod/transform.e' % vtur)
+        os.system('echo %s %s %s | intermod_kurucz' % (teff, logg+erlogg, feh))
+        os.system('echo %s | transform_kurucz' % vtur)
         os.system('mv out.atm %s_erlogg.atm' %starname)
 
-        os.system('echo %s %s %s | /home/vadibekyan/Programs/kurucz_intermod/intermod' % (teff, logg, feh))
-        os.system('echo %s | /home/vadibekyan/Programs/kurucz_intermod/transform.e' % (vtur + ervtur))
+        os.system('echo %s %s %s | intermod_kurucz' % (teff, logg, feh))
+        os.system('echo %s | transform_kurucz' % (vtur + ervtur))
         os.system('mv out.atm %s_ervtur.atm' %starname)
 
         os.system('rm mod*')
