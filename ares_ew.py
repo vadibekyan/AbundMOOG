@@ -41,7 +41,15 @@ class EWMeasurements:
 
     def mine_opt(self, spectra_name):
         '''Creates the mine.opt file'''
-        fout = "specfits='./%s.fits\'\n" % spectra_name
+        # Check the number of lines (rows) in the input DataFrame.
+        # If more than one row, use the "spectra/" subdirectory for the .fits file,
+        # otherwise search for the file in the current directory.
+        if len(self.input_df) > 1:
+            specfits_line = "specfits='./spectra/%s.fits'\n" % spectra_name
+        else:
+            specfits_line = "specfits='./%s.fits'\n" % spectra_name
+
+        fout = specfits_line
         fout += "readlinedat= 'cdo.dat'\n"
         fout += "fileout='aresout.dat'\n"
         fout += "lambdai= 3000\n"
@@ -156,12 +164,16 @@ class EWMeasurements:
             os.system('mv  aresout_%s_ew_err.dat ./ares_ew/err_ew/%s_aresout_ew_err.dat' % (starlist.star[i], starlist.star[i]))
 
 
-        os.system('cp -r ares_ew ares_ew_corr')
+        if not os.path.exists("ares_ew_corr"):
+            os.system('cp -r ares_ew ares_ew_corr')
+        else:
+            print("Directory 'ares_ew_corr' already exists. Skipping copy.")
+
         print ("Done")
 
 
 if __name__ == '__main__':
-    input_params = pd.read_table('input_param_error.rdb')
+    input_params = pd.read_csv("input_param_error.rdb", sep='\s+', skiprows=[1])
     ew_ares = EWMeasurements(input_params)
     ew_measurements = ew_ares.ew_measurements()
 
