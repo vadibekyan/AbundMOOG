@@ -38,7 +38,7 @@ def abundances_results_formatting_column(input_starlist, element_file, output_fi
     """
     Format abundances into columns with stars as separate entries.
     """
-    input_data = pd.read_table(input_starlist)
+    input_data = pd.read_csv(input_starlist, sep='\s+', skiprows=[1])
     element_info = pd.read_table(element_file)
 
 
@@ -60,7 +60,9 @@ def abundances_results_formatting_line(input_starlist, column_file, output_file)
     """
     Format abundances into rows with elements as separate entries.
     """
-    input_data = pd.read_table(input_starlist)
+    input_data = pd.read_csv(input_starlist, sep='\s+', skiprows=[1])
+    print (input_data)
+
     abundances_formatted_column = pd.read_table(column_file)
 
     for j, element in enumerate(abundances_formatted_column.element):

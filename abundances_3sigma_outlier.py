@@ -388,7 +388,7 @@ def abundances(input_starlist):
     """
     Main program to derive abundances and errors for a list of stars
     """
-    starlist = pd.read_table(input_starlist)
+    starlist = pd.read_csv(input_starlist, sep='\s+', skiprows=[1])
 
     for i in range(len(starlist)):
         print (starlist.star[i])
@@ -403,6 +403,7 @@ def abundances(input_starlist):
         os.system('rm ./moog_abundances/abundances_hfs/moog_abstar/*abund_param_err.dat ./moog_abundances/abundances_hfs/moog_abstar/*orig_abund.dat ./moog_abundances/abundances_hfs/moog_abstar/*orig_abund_ew_err.dat')
 
 abundances('input_param_error.rdb')
+
 
 """
 if __name__ == '__main__':
