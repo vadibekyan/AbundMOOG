@@ -46,6 +46,7 @@ class AtmosphereModeling():
         os.system("mkdir atmospheres")
 
         starlist = self.input_df
+        print (starlist.columns)
 
         for i in range(len(starlist)):
 
@@ -59,8 +60,13 @@ class AtmosphereModeling():
             os.system('mv %s_ervtur.atm atmospheres/%s_ervtur.atm' % (starlist.star[i], starlist.star[i]))
 
 
+
+
 if __name__ == '__main__':
-    input_params = pd.read_table('input_param_error.rdb')
+    # Read the file; the first option reads the .rdb file with skiprows for the dashed line.
+    input_params = pd.read_csv("input_param_error.rdb", sep='\s+', skiprows=[1])
+
     atmospheres = AtmosphereModeling(input_params)
     atmospheres.model_atmospheres()
+
 
