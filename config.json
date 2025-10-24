@@ -1,0 +1,25 @@
+{
+  "paths": {
+    "inputs_dir": "inputs",
+    "outputs_dir": "outputs",
+    "ares_ew_corr": "outputs/ares_ew_corr",
+    "ares_ew_corr_err": "outputs/ares_ew_corr/err_ew",
+    "atmospheres": "outputs/atmospheres",
+    "moog_root": "outputs/moog_abundances/moog_abstar",
+    "analysis_dir": "outputs/analysis",
+    "plots_dir": "outputs/plots"
+  },
+  "moog": {
+    "moog_cmd": "MOOGSILENT2019",
+    "damping_mode": 1
+  },
+  "formatting": {
+    "input_starlist": "inputs/input_param_error.rdb",
+    "element_file": "inputs/elements_formatting.rdb"
+  },
+  "plot": {
+    "elements_to_plot": "inputs/elements_to_plot.rdb",
+    "harps_catalog": "inputs/abundances_harps1111_o_c.rdb",
+    "target_name": ""
+  }
+}
